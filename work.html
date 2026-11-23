@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Work Samples | Katherine Yeh</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&family=Share+Tech+Mono&display=swap">
+<style>
+:root {
+  --bg: #EDF4F9; --land: #F9FCFE; --surface: #FFFFFF; --fg: #2E2B2A; --muted: #6B6560; --line: #E6E0D8;
+  --sky: #C2D9E9; --sun: #FFE8B0; --accent: #6A96B4; --ink-gold: #C9A03A;
+  --font: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+  --ticket: "Share Tech Mono", "OCR B", "Courier New", ui-monospace, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --bg: #1F1C1A; --land: #2A3036; --surface: #2A2623; --fg: #F3EEE8; --muted: #B3AAA1; --line: #3C3631; --sky: #3B4A55; --sun: #5A4C2A; --accent: #A9CBE0; --ink-gold: #E8D48A; color-scheme: dark; }
+}
+:root[data-theme="dark"] { --bg: #1F1C1A; --land: #2A3036; --surface: #2A2623; --fg: #F3EEE8; --muted: #B3AAA1; --line: #3C3631; --sky: #3B4A55; --sun: #5A4C2A; --accent: #A9CBE0; --ink-gold: #E8D48A; color-scheme: dark; }
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--font); font-size: 17px; line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); overflow-x: clip; }
+body::after { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none; background: var(--land); -webkit-mask: url(map.svg) center top / max(100vw, 1500px) auto no-repeat; mask: url(map.svg) center top / max(100vw, 1500px) auto no-repeat; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
+.wrap { max-width: 960px; margin-inline: auto; }
+h1, h2 { font-weight: 500; line-height: 1.1; margin: 0; letter-spacing: -0.025em; }
+p { margin: 0; }
+.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 20px; }
+.brand { font-size: 18px; font-weight: 500; text-decoration: none; }
+.back { text-decoration: none; font-size: 15px; color: var(--muted); }
+.back:hover { color: var(--fg); }
+h1 { font-size: clamp(34px, 5vw, 52px); padding-top: 56px; }
+.intro { margin-top: 14px; color: var(--muted); max-width: 52ch; }
+section { padding-block: 64px 0; }
+h2 { font-size: clamp(24px, 3vw, 30px); margin-bottom: 24px; }
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; display: grid; grid-template-rows: auto 1fr; }
+.thumb { aspect-ratio: 4 / 3; display: grid; place-items: center; text-align: center; padding: 12px; font-family: var(--ticket); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); background: color-mix(in srgb, var(--sky) 45%, var(--surface)); border-bottom: 1.5px dashed color-mix(in srgb, var(--fg) 25%, transparent); }
+.meta { padding: 16px 18px 20px; }
+.meta h3 { font-size: 18px; font-weight: 500; margin: 0 0 4px; letter-spacing: -0.01em; }
+.meta p { font-size: 15px; color: var(--muted); }
+.grid4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.reel { text-decoration: none; color: inherit; transition: transform .3s, box-shadow .3s; }
+.reel:hover { transform: translateY(-3px); box-shadow: 0 14px 30px -20px rgba(46,43,42,.35); }
+.vthumb { aspect-ratio: 9 / 14; position: relative; background: linear-gradient(160deg, color-mix(in srgb, var(--sky) 70%, var(--surface)) 0%, var(--surface) 50%, color-mix(in srgb, var(--sun) 70%, var(--surface)) 100%); border-bottom: 1px solid var(--line); color: var(--fg); }
+.vthumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.vthumb .play { position: absolute; top: 12px; right: 12px; z-index: 1; opacity: .95; width: 36px; height: 36px; border-radius: 50%; background: var(--surface); border: 1px solid var(--line); display: grid; place-items: center; box-shadow: 0 8px 20px -10px rgba(46,43,42,.4); }
+.vthumb .play::before { content: ""; border-left: 10px solid var(--accent); border-top: 6px solid transparent; border-bottom: 6px solid transparent; margin-left: 3px; }
+.vthumb .tag { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); white-space: nowrap; z-index: 1; padding: 5px 10px; border-radius: 999px; background: color-mix(in srgb, var(--surface) 88%, transparent); color: var(--fg); }
+.piece-card { text-decoration: none; color: inherit; grid-template-rows: 1fr; transition: transform .3s, box-shadow .3s; }
+.piece-card:hover { transform: translateY(-3px); box-shadow: 0 14px 30px -20px rgba(46,43,42,.35); }
+.piece-card .meta { display: flex; flex-direction: column; gap: 6px; padding: 22px 20px 20px; }
+.piece-card .kind { font-family: var(--ticket); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+.piece-card h3 { font-size: 20px; line-height: 1.2; margin: 2px 0 4px; }
+.piece-card .read { margin-top: auto; padding-top: 14px; color: var(--fg); font-weight: 500; font-size: 15px; }
+footer { padding-block: 72px 40px; color: var(--muted); font-size: 14px; }
+.reels { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; }
+.reels .meta { padding: 14px 14px 16px; }
+.reels .meta p { font-size: 14px; }
+@media (max-width: 960px) { .reels { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 820px) { .grid, .grid4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .grid:not(.grid4) { grid-template-columns: minmax(0, 1fr); } section { padding-block: 48px 0; } }
+</style>
+</head>
+<body>
+<header class="nav"><div class="wrap">
+  <a class="brand" href="index.html">Katherine Yeh</a>
+  <a class="back" href="index.html">&larr; Back to portfolio</a>
+</div></header>
+<main class="wrap">
+  <h1>Work Samples</h1>
+  <p class="intro">A few pieces of marketing and writing I&rsquo;m proud of.</p>
+
+  <section aria-labelledby="mk-h">
+    <h2 id="mk-h">Marketing</h2>
+    <div class="grid grid4 reels">
+      <a class="card reel" href="https://www.instagram.com/reel/C3_XWG1vLa9/" target="_blank" rel="noopener noreferrer">
+        <div class="thumb vthumb"><img src="reel-1.jpg" alt="Thumbnail for Reel 1" loading="lazy"><span class="play" aria-hidden="true"></span><span class="tag">Instagram Reel</span></div>
+        <div class="meta"><h3>Reel 1</h3><p>Watch on Instagram <span aria-hidden="true">&nearr;</span></p></div>
+      </a>
+      <a class="card reel" href="https://www.instagram.com/reel/C2OdBVRL0Z_/" target="_blank" rel="noopener noreferrer">
+        <div class="thumb vthumb"><img src="reel-2.jpg" alt="Thumbnail for Reel 2" loading="lazy"><span class="play" aria-hidden="true"></span><span class="tag">Instagram Reel</span></div>
+        <div class="meta"><h3>Reel 2</h3><p>Watch on Instagram <span aria-hidden="true">&nearr;</span></p></div>
+      </a>
+      <a class="card reel" href="https://www.instagram.com/reel/C7FXVi7yQbD/" target="_blank" rel="noopener noreferrer">
+        <div class="thumb vthumb"><img src="reel-3.jpg" alt="Thumbnail for Reel 3" loading="lazy"><span class="play" aria-hidden="true"></span><span class="tag">Instagram Reel</span></div>
+        <div class="meta"><h3>Reel 3</h3><p>Watch on Instagram <span aria-hidden="true">&nearr;</span></p></div>
+      </a>
+      <a class="card reel" href="https://www.instagram.com/reel/DTgD61iD7Bg/" target="_blank" rel="noopener noreferrer">
+        <div class="thumb vthumb"><img src="reel-4.jpg" alt="Thumbnail for Reel 4" loading="lazy"><span class="play" aria-hidden="true"></span><span class="tag">Instagram Reel</span></div>
+        <div class="meta"><h3>Reel 4</h3><p>Watch on Instagram <span aria-hidden="true">&nearr;</span></p></div>
+      </a>
+      <a class="card reel" href="https://www.instagram.com/reel/DJsYhbOSetE/" target="_blank" rel="noopener noreferrer">
+        <div class="thumb vthumb"><img src="reel-5.jpg" alt="Thumbnail for Reel 5" loading="lazy"><span class="play" aria-hidden="true"></span><span class="tag">Instagram Reel</span></div>
+        <div class="meta"><h3>Reel 5</h3><p>Watch on Instagram <span aria-hidden="true">&nearr;</span></p></div>
+      </a>
+    </div>
+  </section>
+
+  <section aria-labelledby="wr-h">
+    <h2 id="wr-h">Writing</h2>
+    <div class="grid grid4">
+      <a class="card piece-card" href="writing-product-email.html">
+        <div class="meta"><p class="kind">Email copy</p><h3>New Product Email</h3><p>Subject: “Prototype Faster with this Month’s New Components.” 130+ new SKUs, same-week shipping, no minimums.</p><p class="read">Read <span aria-hidden="true">&rarr;</span></p></div>
+      </a>
+      <a class="card piece-card" href="writing-connexpedition-post.html">
+        <div class="meta"><p class="kind">Instagram copy</p><h3>Connexpedition 2024 Application Post</h3><p>A caption announcing applications for a two-week youth service program teaching English in Taiwan.</p><p class="read">Read <span aria-hidden="true">&rarr;</span></p></div>
+      </a>
+      <a class="card piece-card" href="writing-bereal-op-ed.html">
+        <div class="meta"><p class="kind">Op-ed</p><h3>Why BeReal is my new favorite app</h3><p>Five nonnegotiables for an ethical social media app, from a deleted-and-redownloaded BeReal.</p><p class="read">Read <span aria-hidden="true">&rarr;</span></p></div>
+      </a>
+      <a class="card piece-card" href="writing-symphony-on-highway-17.html">
+        <div class="meta"><p class="kind">Personal essay</p><h3>Symphony on Highway 17</h3><p>Four high school friends drive home from Santa Cruz and hear how differently they now sound.</p><p class="read">Read <span aria-hidden="true">&rarr;</span></p></div>
+      </a>
+    </div>
+  </section>
+</main>
+<footer><div class="wrap">&copy; Katherine Yeh</div></footer>
+</body>
+</html>

@@ -49,7 +49,6 @@ h2 { font-size: clamp(24px, 3vw, 30px); margin-bottom: 24px; }
 .vthumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; }
 .vthumb .play { position: absolute; top: 12px; right: 12px; z-index: 1; opacity: .95; width: 36px; height: 36px; border-radius: 50%; background: var(--surface); border: 1px solid var(--line); display: grid; place-items: center; box-shadow: 0 8px 20px -10px rgba(46,43,42,.4); }
 .vthumb .play::before { content: ""; border-left: 10px solid var(--accent); border-top: 6px solid transparent; border-bottom: 6px solid transparent; margin-left: 3px; }
-.vthumb .tag { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); white-space: nowrap; z-index: 1; padding: 5px 10px; border-radius: 999px; background: color-mix(in srgb, var(--surface) 88%, transparent); color: var(--fg); }
 .piece-card { text-decoration: none; color: inherit; grid-template-rows: 1fr; transition: transform .3s, box-shadow .3s; }
 .piece-card:hover { transform: translateY(-3px); box-shadow: 0 14px 30px -20px rgba(46,43,42,.35); }
 .piece-card .meta { display: flex; flex-direction: column; gap: 6px; padding: 22px 20px 20px; }
@@ -58,11 +57,30 @@ h2 { font-size: clamp(24px, 3vw, 30px); margin-bottom: 24px; }
 .piece-card .read { margin-top: auto; padding-top: 14px; color: var(--fg); font-weight: 500; font-size: 15px; }
 footer { padding-block: 72px 40px; color: var(--muted); font-size: 14px; }
 .reels { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; }
-.reels .meta { padding: 14px 14px 16px; }
+.reels .meta { display: flex; flex-direction: column; padding: 14px 14px 16px; }
 .reels .meta p { font-size: 14px; }
+.reel-description {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  align-content: center;
+  padding: 14px;
+  background: rgba(23, 30, 37, .94);
+  color: white;
+  font: 400 14px/1.45 var(--font);
+  letter-spacing: normal;
+  text-align: left;
+  text-transform: none;
+  opacity: 0;
+}
+.reel .vthumb:hover .reel-description,
+.reel:focus-visible .reel-description { opacity: 1; }
+.reel-watch { margin-top: auto; padding-top: 4px; }
 @media (max-width: 960px) { .reels { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media (max-width: 820px) { .grid, .grid4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 520px) { .grid:not(.grid4) { grid-template-columns: minmax(0, 1fr); } section { padding-block: 48px 0; } }
+@media (max-width: 480px) { .reels { grid-template-columns: minmax(0, 1fr); } }
 </style>
 </head>
 <body>
@@ -78,24 +96,54 @@ footer { padding-block: 72px 40px; color: var(--muted); font-size: 14px; }
     <h2 id="mk-h">Marketing</h2>
     <div class="grid grid4 reels">
       <a class="card reel" href="https://www.instagram.com/reel/C3_XWG1vLa9/" target="_blank" rel="noopener noreferrer">
-        <div class="thumb vthumb"><img src="reel-1.jpg" alt="Thumbnail for Reel 1" loading="lazy"><span class="play" aria-hidden="true"></span><span class="tag">Instagram Reel</span></div>
-        <div class="meta"><h3>Reel 1</h3><p>Watch on Instagram <span aria-hidden="true">&nearr;</span></p></div>
+        <div class="thumb vthumb">
+          <img src="reel-1.jpg" alt="Thumbnail for Reel 1" loading="lazy"><span class="play" aria-hidden="true"></span>
+          <p class="reel-description">Turned an airport trip into content, sparking curiosity about Fan-Fan and leveraging the loop format for repeat views.</p>
+        </div>
+        <div class="meta">
+          <h3>Looping for Engagement</h3>
+          <p class="reel-watch">Watch on Instagram <span aria-hidden="true">&nearr;</span></p>
+        </div>
       </a>
       <a class="card reel" href="https://www.instagram.com/reel/C2OdBVRL0Z_/" target="_blank" rel="noopener noreferrer">
-        <div class="thumb vthumb"><img src="reel-2.jpg" alt="Thumbnail for Reel 2" loading="lazy"><span class="play" aria-hidden="true"></span><span class="tag">Instagram Reel</span></div>
-        <div class="meta"><h3>Reel 2</h3><p>Watch on Instagram <span aria-hidden="true">&nearr;</span></p></div>
+        <div class="thumb vthumb">
+          <img src="reel-2.jpg" alt="Thumbnail for Reel 2" loading="lazy"><span class="play" aria-hidden="true"></span>
+          <p class="reel-description">A fast-paced food montage using dynamic editing, creating a crave-worthy visual experience and interest for Fan-Fan hot pot.</p>
+        </div>
+        <div class="meta">
+          <h3>Creating the Crave Effect</h3>
+          <p class="reel-watch">Watch on Instagram <span aria-hidden="true">&nearr;</span></p>
+        </div>
       </a>
       <a class="card reel" href="https://www.instagram.com/reel/C7FXVi7yQbD/" target="_blank" rel="noopener noreferrer">
-        <div class="thumb vthumb"><img src="reel-3.jpg" alt="Thumbnail for Reel 3" loading="lazy"><span class="play" aria-hidden="true"></span><span class="tag">Instagram Reel</span></div>
-        <div class="meta"><h3>Reel 3</h3><p>Watch on Instagram <span aria-hidden="true">&nearr;</span></p></div>
+        <div class="thumb vthumb">
+          <img src="reel-3.jpg" alt="Thumbnail for Reel 3" loading="lazy"><span class="play" aria-hidden="true"></span>
+          <p class="reel-description">Adapted a trending trust fall challenge to introduce a new menu item, combining timely social media trends with product promotion.</p>
+        </div>
+        <div class="meta">
+          <h3>Trends for Product Promotion</h3>
+          <p class="reel-watch">Watch on Instagram <span aria-hidden="true">&nearr;</span></p>
+        </div>
       </a>
       <a class="card reel" href="https://www.instagram.com/reel/DTgD61iD7Bg/" target="_blank" rel="noopener noreferrer">
-        <div class="thumb vthumb"><img src="reel-4.jpg" alt="Thumbnail for Reel 4" loading="lazy"><span class="play" aria-hidden="true"></span><span class="tag">Instagram Reel</span></div>
-        <div class="meta"><h3>Reel 4</h3><p>Watch on Instagram <span aria-hidden="true">&nearr;</span></p></div>
+        <div class="thumb vthumb">
+          <img src="reel-4.jpg" alt="Thumbnail for Reel 4" loading="lazy"><span class="play" aria-hidden="true"></span>
+          <p class="reel-description">A testimonial video highlighting volunteers' firsthand experiences to build credibility, encourage word-of-mouth, and attract prospective applicants.</p>
+        </div>
+        <div class="meta">
+          <h3>Storytelling Through Testimonials</h3>
+          <p class="reel-watch">Watch on Instagram <span aria-hidden="true">&nearr;</span></p>
+        </div>
       </a>
       <a class="card reel" href="https://www.instagram.com/reel/DJsYhbOSetE/" target="_blank" rel="noopener noreferrer">
-        <div class="thumb vthumb"><img src="reel-5.jpg" alt="Thumbnail for Reel 5" loading="lazy"><span class="play" aria-hidden="true"></span><span class="tag">Instagram Reel</span></div>
-        <div class="meta"><h3>Reel 5</h3><p>Watch on Instagram <span aria-hidden="true">&nearr;</span></p></div>
+        <div class="thumb vthumb">
+          <img src="reel-5.jpg" alt="Thumbnail for Reel 5" loading="lazy"><span class="play" aria-hidden="true"></span>
+          <p class="reel-description">Combined a trending video format with informative captions to introduce Ditto AI and communicate key information in an engaging, accessible way.</p>
+        </div>
+        <div class="meta">
+          <h3>Trends for Information</h3>
+          <p class="reel-watch">Watch on Instagram <span aria-hidden="true">&nearr;</span></p>
+        </div>
       </a>
     </div>
   </section>

@@ -76,7 +76,7 @@ p { margin: 0; }
 .pp-fields { margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 14px; align-content: start; }
 .pf { min-width: 0; }
 .pf dt { font-size: 9px; font-weight: 500; letter-spacing: .04em; color: var(--muted); }
-.pf dd { margin: 2px 0 0; font-size: 15px; font-weight: 500; line-height: 1.35; letter-spacing: .02em; overflow-wrap: anywhere; }
+.pf dd { margin: 2px 0 0; font-family: var(--font); font-size: 15px; font-weight: 500; line-height: 1.35; letter-spacing: .02em; overflow-wrap: anywhere; }
 .pf dd.name { font-size: 22px; font-weight: 500; line-height: 1.2; }
 .pp-head, .pp-body, .mrz { position: relative; z-index: 1; }
 .mrz { font-family: var(--ticket); margin-top: 18px; padding: 8px 10px; border-radius: 4px; background: color-mix(in srgb, var(--sky) 45%, transparent); font-size: clamp(9px, 2.4vw, 13px); line-height: 1.55; letter-spacing: .04em; white-space: nowrap; overflow: hidden; color: var(--fg); opacity: .8; }
@@ -87,17 +87,23 @@ p { margin: 0; }
 .pass-top svg { width: 30px; height: 30px; flex: none; }
 .pass-main { padding: 22px 24px 24px; display: grid; gap: 20px; }
 .pass dl { margin: 0; }
-.lang { padding-top: 18px; border-top: 1px solid var(--line); }
-.f.lang dd { font-size: 15px; letter-spacing: .02em; }
-.pass .tag { text-align: left; margin: 0; font-size: 15px; line-height: 1.5; letter-spacing: .02em; color: var(--fg); }
+.pass-statement {
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  text-transform: none;
+}
+.pass-description {
+  max-width: 50ch;
+  font: 400 16px/1.45 var(--ticket);
+  color: var(--muted);
+  text-transform: uppercase;
+}
 .f dt { font-size: 11px; letter-spacing: .16em; color: var(--muted); }
 .f dd { margin: 2px 0 0; font-size: 28px; letter-spacing: .02em; line-height: 1.25; }
-.legs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; align-items: start; padding-top: 18px; border-top: 1px solid var(--line); }
-.legs .f dd { font-size: 17px; line-height: 1.3; }
-.legs .f:nth-child(2) { text-align: center; }
-.hero-stack .legs { grid-template-columns: 1fr auto 1fr; }
-.hero-stack .legs .f dd { white-space: nowrap; }
-.legs .f:nth-child(3) { text-align: right; }
+.legs { display: grid; grid-template-columns: 1fr auto 1fr; gap: 12px; margin: 0; padding: 18px 0 0; border-top: 1px solid var(--line); list-style: none; font-size: 14px; line-height: 1.3; letter-spacing: .02em; }
+.legs li { position: relative; inset-block-start: 4px; white-space: nowrap; }
+.legs li:nth-child(2) { text-align: center; }
+.legs li:last-child { text-align: right; }
 .perf { position: relative; border-top: 2px dashed var(--line); }
 .perf::before, .perf::after { content: ""; position: absolute; top: -11px; width: 20px; height: 20px; border-radius: 50%; background: var(--bg); border: 1px solid var(--line); }
 .perf::before { left: -11px; }
@@ -111,32 +117,32 @@ p { margin: 0; }
 .hero-stack .passport { grid-column: 1; grid-row: 1; justify-self: start; width: 600px; aspect-ratio: 5 / 3; display: flex; margin: 160px 0 0; max-width: none; transform: rotate(-4deg); z-index: 1; }
 .hero-stack .pp-page { flex: 1; min-width: 0; display: flex; flex-direction: column; }
 .hero-stack .pp-fields { grid-template-columns: minmax(0, 1fr); gap: 11px; align-content: start; align-self: stretch; }
-.hero-stack { --ps: 1; --poy: 0px; --pox: -200px; --kay: 0px; --kax: 200px; --px: 26px; --py: -12px; }
+.hero-stack { --passport-front-x: -6px; --passport-front-y: -118px; --ps: 1; --swap-slide: 200px; --px: -6px; --py: 118px; }
 .hero-stack .passport { outline: none; cursor: pointer; }
-.hero-stack.front .pass { animation: pass-up 1.4s linear forwards; }
-.hero-stack.back .pass { animation: pass-down 1.4s linear forwards; }
-.hero-stack .passport.up { animation: pp-up 1.4s linear forwards; }
-.hero-stack .passport.down { animation: pp-down 1.4s linear forwards; }
+.hero-stack.front .pass { animation: pass-up 1.2s linear forwards; }
+.hero-stack.back .pass { animation: pass-down 1.2s linear forwards; }
+.hero-stack .passport.up { animation: pp-up 1.2s linear forwards; }
+.hero-stack .passport.down { animation: pp-down 1.2s linear forwards; }
 @keyframes pp-up {
   0% { transform: rotate(-4deg) scale(var(--ps)); z-index: 1; box-shadow: 0 20px 44px -30px rgba(46,43,42,.22); animation-timing-function: cubic-bezier(.37,0,.63,1); }
-  44% { transform: translate(var(--pox), var(--poy)) rotate(-4deg) scale(var(--ps)); z-index: 1; }
-  45% { transform: translate(var(--pox), var(--poy)) rotate(-4deg) scale(var(--ps)); z-index: 3; animation-timing-function: cubic-bezier(.37,0,.63,1); }
-  100% { transform: translateY(-6px) rotate(0deg) scale(var(--ps)); z-index: 3; box-shadow: 0 18px 36px -18px rgba(60,50,40,.45); }
+  44% { transform: translateX(calc(-1 * var(--swap-slide))) rotate(-4deg) scale(var(--ps)); z-index: 1; }
+  45% { transform: translateX(calc(-1 * var(--swap-slide))) rotate(-4deg) scale(var(--ps)); z-index: 3; animation-timing-function: cubic-bezier(.37,0,.63,1); }
+  100% { transform: translate(var(--passport-front-x, 0px), var(--passport-front-y)) rotate(0deg) scale(var(--passport-front-scale, var(--ps))); z-index: 3; box-shadow: 0 18px 36px -18px rgba(60,50,40,.45); }
 }
 @keyframes pp-down {
-  0% { transform: translateY(-6px) rotate(0deg) scale(var(--ps)); z-index: 3; box-shadow: 0 18px 36px -18px rgba(60,50,40,.45); animation-timing-function: cubic-bezier(.37,0,.63,1); }
-  55% { transform: translate(var(--pox), var(--poy)) rotate(-4deg) scale(var(--ps)); z-index: 3; }
-  56% { transform: translate(var(--pox), var(--poy)) rotate(-4deg) scale(var(--ps)); z-index: 1; animation-timing-function: cubic-bezier(.37,0,.63,1); }
+  0% { transform: translate(var(--passport-front-x, 0px), var(--passport-front-y)) rotate(0deg) scale(var(--passport-front-scale, var(--ps))); z-index: 3; box-shadow: 0 18px 36px -18px rgba(60,50,40,.45); animation-timing-function: cubic-bezier(.37,0,.63,1); }
+  55% { transform: translateX(calc(-1 * var(--swap-slide))) rotate(-4deg) scale(var(--ps)); z-index: 3; }
+  56% { transform: translateX(calc(-1 * var(--swap-slide))) rotate(-4deg) scale(var(--ps)); z-index: 1; animation-timing-function: cubic-bezier(.37,0,.63,1); }
   100% { transform: rotate(-4deg) scale(var(--ps)); z-index: 1; box-shadow: 0 20px 44px -30px rgba(46,43,42,.22); }
 }
 @keyframes pass-up {
   0% { transform: none; animation-timing-function: cubic-bezier(.37,0,.63,1); }
-  45% { transform: translate(var(--kax), var(--kay)); animation-timing-function: cubic-bezier(.37,0,.63,1); }
-  100% { transform: translate(var(--px), var(--py)); }
+  45% { transform: translateX(var(--swap-slide)); animation-timing-function: cubic-bezier(.37,0,.63,1); }
+  100% { transform: translate(var(--px), var(--py)) rotate(4deg); }
 }
 @keyframes pass-down {
-  0% { transform: translate(var(--px), var(--py)); animation-timing-function: cubic-bezier(.37,0,.63,1); }
-  55% { transform: translate(var(--kax), var(--kay)); animation-timing-function: cubic-bezier(.37,0,.63,1); }
+  0% { transform: translate(var(--px), var(--py)) rotate(4deg); animation-timing-function: cubic-bezier(.37,0,.63,1); }
+  55% { transform: translateX(var(--swap-slide)); animation-timing-function: cubic-bezier(.37,0,.63,1); }
   100% { transform: none; }
 }
 @media (prefers-reduced-motion: reduce) { .hero-stack .passport.up, .hero-stack .passport.down, .hero-stack.front .pass, .hero-stack.back .pass { animation-duration: .01s; } }
@@ -175,7 +181,7 @@ section > h2 { font-size: clamp(28px, 3.6vw, 36px); margin-bottom: 36px; }
 .btn { display: inline-flex; align-items: center; gap: 10px; padding: 13px 24px; border-radius: 999px; background: var(--sky); border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--sky)); color: var(--fg); text-decoration: none; font-size: 16px; font-weight: 500; transition: background .25s, transform .25s; }
 .btn:hover { background: color-mix(in srgb, var(--sun) 70%, var(--surface)); transform: translateY(-1px); }
 .jobs { list-style: none; margin: 0; padding: 0; }
-.job { display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 32px; padding-block: 32px; border-top: 1px solid var(--line); }
+.job { display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 32px; padding-block: 26px; border-top: 1px solid var(--line); }
 .job:last-child { border-bottom: 1px solid var(--line); }
 .stamp-cell { padding-top: 2px; }
 .stamp { display: block; width: 124px; height: 124px; transform: rotate(var(--r)); opacity: .88; }
@@ -183,10 +189,11 @@ section > h2 { font-size: clamp(28px, 3.6vw, 36px); margin-bottom: 36px; }
 .stamp.gold { color: var(--ink-gold); }
 .stamp text { font-family: var(--ticket); fill: currentColor; stroke: none; }
 .stamp use { fill: currentColor; }
-.job .when { margin-top: 2px; font-size: 15px; color: var(--muted); }
+.job .when, .job .sum { font-size: 15px; color: var(--muted); }
+.job .when { margin-top: 2px; }
 .job h3 { font-size: clamp(22px, 2.8vw, 26px); }
 .job .role { margin-top: 4px; color: var(--accent); font-weight: 500; font-size: 16px; }
-.job .sum { margin-top: 12px; max-width: 52ch; color: var(--muted); }
+.job .sum { margin-top: 8px; }
 .metrics { display: none; /* hidden for now: delete this line to bring the metrics back */ flex-wrap: wrap; gap: 14px 40px; margin-top: 22px; }
 .metrics div { min-width: 0; }
 .metrics strong { display: block; font-size: 34px; font-weight: 500; line-height: 1; color: var(--accent); letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
@@ -212,7 +219,7 @@ footer { padding-block: 56px 40px; color: var(--muted); font-size: 14px; }
   body { font-size: 16px; }
   .hero { padding-block: 24px 0; }
   /* phone: the same composition as desktop, drawn on a 520px stage and scaled to fit by the script below */
-  .hero-stack { --ps: .8; --poy: 0px; --pox: -165px; --kay: 0px; --kax: 150px; --px: 12px; --py: -10px; display: block; position: relative; width: 520px; height: 480px; padding: 0; transform: scale(var(--s, .7)); transform-origin: 0 0; }
+  .hero-stack { --passport-front-x: 18px; --passport-front-y: -108px; --passport-front-scale: .88; --ps: .8; --swap-slide: 155px; --px: -6px; --py: 52px; display: block; position: relative; width: 520px; height: 480px; padding: 0; transform: scale(var(--s, .7)); transform-origin: 0 0; }
   .hero-stack .pass { position: absolute; left: 190px; top: 0; width: 330px; max-width: none; margin: 0; z-index: 2; }
   .hero-stack .passport { position: absolute; left: -60px; top: 139px; margin: 0; width: 600px; transform: rotate(-4deg) scale(.8); z-index: 1; }
   .hero-stack .mrz { font-size: 15px; }
@@ -220,15 +227,13 @@ footer { padding-block: 56px 40px; color: var(--muted); font-size: 14px; }
   .hero-stack .pass-main { padding: 18px 20px 20px; gap: 16px; }
   .hero-stack .pass .f dt { font-size: 12px; }
   .hero-stack .pass .f dd { font-size: 23px; }
-  .hero-stack .legs { gap: 6px; padding-top: 16px; }
-  .hero-stack .legs .f dd { font-size: 12.5px; letter-spacing: 0; }
-  .hero-stack .f.lang { padding-top: 16px; }
-  .hero-stack .f.lang dd { font-size: 14px; letter-spacing: 0; }
-  .hero-stack .pass .tag { font-size: 14px; }
+  .hero-stack .legs { gap: 6px; padding-top: 16px; font-size: 12px; letter-spacing: 0; }
+  .pass-statement { padding-top: 16px; }
+  .pass-description { font-size: 18px; }
   .hero-stack .stub { padding: 16px 20px 18px; }
   section { padding-block: 64px 0; }
   .nav ul { gap: 16px; }
-  .job { grid-template-columns: 78px minmax(0, 1fr); gap: 16px; padding-block: 26px; }
+  .job { grid-template-columns: 78px minmax(0, 1fr); gap: 16px; padding-block: 22px; }
   .stamp { width: 78px; height: 78px; }
   .metrics strong { font-size: 30px; }
   .posters { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
@@ -287,12 +292,14 @@ footer { padding-block: 56px 40px; color: var(--muted); font-size: 14px; }
       <div class="pass-top"><svg aria-hidden="true" focusable="false"><use href="#plane"></use></svg>Boarding pass</div>
       <div class="pass-main">
         <dl class="f"><dt>Passenger</dt><dd>Katherine Yeh</dd></dl>
-        <p class="f lang tag">Combining data and creativity to execute effective campaigns and meaningful projects.</p>
-        <div class="legs">
-          <dl class="f"><dt>From</dt><dd>Marketing</dd></dl>
-          <dl class="f"><dt class="ghost">&nbsp;</dt><dd>Program management</dd></dl>
-          <dl class="f"><dt>To</dt><dd>Sales</dd></dl>
+        <div class="pass-statement">
+          <p class="pass-description">Combining data and creativity to execute effective campaigns and bring meaningful projects to life.</p>
         </div>
+        <ul class="legs" role="list">
+          <li>Marketing</li>
+          <li>Program management</li>
+          <li>Sales</li>
+        </ul>
       </div>
       <div class="perf" aria-hidden="true"></div>
       <div class="stub" aria-hidden="true"><div class="barcode"></div></div>
@@ -460,7 +467,7 @@ footer { padding-block: 56px 40px; color: var(--muted); font-size: 14px; }
 <script>
 (function(){
   var stack=document.querySelector('.hero-stack'), pp=stack&&stack.querySelector('.passport'); if(!pp) return;
-  var DUR=1400, COOL=350;           // animation length and cool-off (ms)
+  var DUR=1200, COOL=250;           // animation length and cool-off (ms)
   var zone=null, isFront=false, wanted=false, busy=false;
   function sync(){
     if(busy||wanted===isFront) return;
